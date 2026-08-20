@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="datos.Personal" table="personal" discriminator-value="P">
+        <id name="id" column="idPersonal">
+            <generator class="identity"/>
+        </id>
+        <discriminator column="tipoPersonal" type="string"/>
+        
+        <property name="nombre" column="nombre" type="string"/>
+        <property name="apellido" column="apellido" type="string"/>
+        <property name="dni" column="dni" type="int"/>
+        <property name="fechaDeNacimiento" column="fechaDeNacimiento" type="LocalDate"/>
+        <property name="fechaIngreso" column="fechaIngreso" type="LocalDate"/>
+        <property name="sueldoBase" column="sueldoBase" type="float"/>
+
+        <!-- Relación N a 1 con Festival -->
+        <many-to-one name="festival" class="datos.Festival" column="idFestival" not-null="false"/>
+
+        <!-- Subclases -->
+        <subclass name="datos.Cocinero" discriminator-value="COC">
+            <property name="especialidadCulinaria" column="especialidadCulinaria" type="string"/>
+            <property name="plus" column="plus" type="float"/>
+        </subclass>
+
+        <subclass name="datos.Cajero" discriminator-value="CAJ">
+            <property name="turnoTrabajo" column="turnoTrabajo" type="string"/>
+        </subclass>
+    </class>
+</hibernate-mapping>

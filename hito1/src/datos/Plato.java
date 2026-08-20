@@ -1,7 +1,7 @@
 package datos;
 
 public class Plato {
-	private long idPlato;
+	private long id;
 	private String nombre; 
 	private float precioVenta;
 	private float costoProduccion;
@@ -15,12 +15,12 @@ public class Plato {
 		this.costoProduccion = costoProduccion;
 	}
 
-	public long getIdPlato() {
-		return idPlato;
+	public long getId() {
+		return id;
 	}
 
-	protected void setIdPlato(long idPlato) {
-		this.idPlato = idPlato;
+	protected void setId(long idPlato) {
+		this.id = idPlato;
 	}
 
 	public String getNombre() {
@@ -49,7 +49,7 @@ public class Plato {
 
 	@Override
 	public String toString() {
-		return "Plato [idPlato=" + idPlato + ", nombre=" + nombre + ", precioVenta=" + precioVenta
+		return "Plato [idPlato=" + id + ", nombre=" + nombre + ", precioVenta=" + precioVenta
 				+ ", costoProduccion=" + costoProduccion + "]";
 	};
 	

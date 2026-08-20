@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="datos.UnidadVenta" table="unidad_venta" discriminator-value="UV">
+        <id name="id" column="idUnidadVenta">
+            <generator class="identity"/>
+        </id>
+        <discriminator column="tipoUnidad" type="string"/>
+
+        <property name="nombreComercial" column="nombreComercial" type="string"/>
+        <property name="superficieM2" column="superficieM2" type="float"/>
+        <property name="codigoUnico" column="codigoUnico" type="string"/>
+
+        <!-- Relaciones N a 1 -->
+        <many-to-one name="responsable" class="datos.Personal" column="idResponsable" not-null="true"/>
+        <many-to-one name="festival" class="datos.Festival" column="idFestival" not-null="true"/>
+
+        <!-- Relaciones N a N -->
+        <set name="lstIPlatos" table="unidad_plato" lazy="true">
+            <key column="idUnidadVenta"/>
+            <many-to-many class="datos.Plato" column="idPlato"/>
+        </set>
+
+        <set name="lstIPersonal" table="unidad_personal" lazy="true">
+            <key column="idUnidadVenta"/>
+            <many-to-many class="datos.Personal" column="idPersonal"/>
+        </set>
+
+        <!-- Subclases -->
+        <subclass name="datos.FoodTruck" discriminator-value="FT">
+            <property name="patente" column="patente" type="string"/>
+            <property name="conexionElectrica" column="conexionElectrica" type="boolean"/>
+        </subclass>
+
+        <subclass name="datos.PuestoDesarmable" discriminator-value="PD">
+            <property name="carpasComponen" column="carpasComponen" type="int"/>
+            <property name="tiempoMontaje" column="tiempoMontaje" type="int"/>
+        </subclass>
+    </class>
+</hibernate-mapping>

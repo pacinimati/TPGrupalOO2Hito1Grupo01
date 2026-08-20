@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="datos.Festival" table="festival">
+        <id name="id" column="idFestival">
+            <generator class="identity"/>
+        </id>
+        <property name="nombre" column="nombre" type="string"/>
+        <property name="temporada" column="temporada" type="string"/>
+        <property name="fechaInicio" column="fechaInicio" type="LocalDate"/>
+        <property name="fechaFin" column="fechaFin" type="LocalDate"/>
+        <property name="costoPorSuperficie" column="costoPorSuperficie" type="float"/>
+        <property name="costoPorMontaje" column="costoPorMontaje" type="float"/>
+        <property name="plusUsoElectricidad" column="plusUsoElectricidad" type="float"/>
+        <property name="sueldoBase" column="sueldoBase" type="float"/>
+
+        <!-- Relación 1 a N con UnidadVenta -->
+        <set name="lstUnidadVenta" table="unidad_venta" inverse="true" lazy="true">
+            <key column="idFestival"/>
+            <one-to-many class="datos.UnidadVenta"/>
+        </set>
+
+        <!-- Relación 1 a N con Personal -->
+        <set name="lstPersonal" table="personal" inverse="true" lazy="true">
+            <key column="idFestival"/>
+            <one-to-many class="datos.Personal"/>
+        </set>
+    </class>
+</hibernate-mapping>

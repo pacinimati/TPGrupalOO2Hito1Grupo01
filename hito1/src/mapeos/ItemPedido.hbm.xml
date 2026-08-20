@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="datos.ItemPedido" table="item_pedido">
+        <id name="id" column="idItemPedido">
+            <generator class="identity"/>
+        </id>
+        <property name="cantidad" column="cantidad" type="int"/>
+
+        <!-- Relación N a 1 con Plato -->
+        <many-to-one name="plato" class="datos.Plato" column="idPlato" not-null="true"/>
+    </class>
+</hibernate-mapping>
