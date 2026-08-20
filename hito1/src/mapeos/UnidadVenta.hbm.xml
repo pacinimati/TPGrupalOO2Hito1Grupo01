@@ -2,11 +2,10 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="datos.UnidadVenta" table="unidad_venta" discriminator-value="UV">
+    <class name="datos.UnidadVenta" table="unidad_venta">
         <id name="id" column="idUnidadVenta">
             <generator class="identity"/>
         </id>
-        <discriminator column="tipoUnidad" type="string"/>
 
         <property name="nombreComercial" column="nombreComercial" type="string"/>
         <property name="superficieM2" column="superficieM2" type="float"/>
@@ -27,15 +26,18 @@
             <many-to-many class="datos.Personal" column="idPersonal"/>
         </set>
 
-        <!-- Subclases -->
-        <subclass name="datos.FoodTruck" discriminator-value="FT">
+        <!-- Subclase FoodTruck (Estrategia Joined) -->
+        <joined-subclass name="datos.FoodTruck" table="foodtruck">
+            <key column="idUnidadVenta"/>
             <property name="patente" column="patente" type="string"/>
             <property name="conexionElectrica" column="conexionElectrica" type="boolean"/>
-        </subclass>
+        </joined-subclass>
 
-        <subclass name="datos.PuestoDesarmable" discriminator-value="PD">
+        <!-- Subclase PuestoDesarmable (Estrategia Joined) -->
+        <joined-subclass name="datos.PuestoDesarmable" table="puestodesarmable">
+            <key column="idUnidadVenta"/>
             <property name="carpasComponen" column="carpasComponen" type="int"/>
             <property name="tiempoMontaje" column="tiempoMontaje" type="int"/>
-        </subclass>
+        </joined-subclass>
     </class>
 </hibernate-mapping>
