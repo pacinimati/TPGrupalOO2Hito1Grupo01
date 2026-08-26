@@ -100,4 +100,30 @@ public class PedidoDao {
 		}
 		return lista;
 	}
+	public List<Pedido> traerPorPlato(long idPlato) {
+	    List<Pedido> lista = new ArrayList<>();
+	    try {
+	        iniciaOperacion();
+	        String hql = "select distinct p from Pedido p join fetch p.lstItems i join fetch i.plato pl where pl.id = :idPlato order by p.fechaTransaccion desc";
+	        lista = session.createQuery(hql, Pedido.class).setParameter("idPlato", idPlato).getResultList();
+	    } finally {
+	        if (session != null && session.isOpen()) {
+	            session.close();
+	        }
+	    }
+	    return lista;
+	}
+	
+	public Pedido traerUltimoPedido() {
+	    Pedido p = null;
+	    try {
+	        iniciaOperacion();
+	        p = session.createQuery("from Pedido p order by p.fechaTransaccion desc", Pedido.class)
+	                   .setMaxResults(1)
+	                   .uniqueResult();
+	    } finally {
+	        if (session != null && session.isOpen()) session.close();
+	    }
+	    return p;
+	}
 }
