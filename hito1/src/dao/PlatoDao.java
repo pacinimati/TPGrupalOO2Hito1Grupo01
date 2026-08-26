@@ -95,4 +95,19 @@ public class PlatoDao {
 		}
 		return lista;
 	}
+	
+	public List<Plato> traerPorPrecioMenorA(float precio) {
+	    List<Plato> lista = new ArrayList<>();
+	    try {
+	        iniciaOperacion();
+	        lista = session.createQuery("from Plato p where p.precioVenta < :precio order by p.precioVenta asc", Plato.class)
+	                .setParameter("precio", precio)
+	                .getResultList();
+	    } catch (HibernateException he) {
+	        manejaExcepcion(he);
+	    } finally {
+	        if (session != null && session.isOpen()) session.close();
+	    }
+	    return lista;
+	}
 }
