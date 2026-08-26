@@ -1,5 +1,8 @@
 package negocio;
 
+
+import datos.Cajero;
+import datos.Cocinero;
 import dao.PedidoDao;
 import datos.ItemPedido;
 import datos.Pedido;
@@ -102,5 +105,28 @@ public class UnidadVentaABM {
 	    }
 
 	    return recaudacionTotal;
+	}
+	
+	public void traerEmpleadosPorUnidad(long idUnidadVenta) throws Exception {
+	    UnidadVenta uv = dao.traerConListas(idUnidadVenta);
+	    
+	    if (uv == null) {
+	        throw new Exception("No existe la Unidad de Venta con ID: " + idUnidadVenta);
+	    }
+
+	    System.out.println("=== EMPLEADOS ASIGNADOS A: " + uv.getNombreComercial() + " ===");
+
+	    if (uv.getLstIPersonal() == null || uv.getLstIPersonal().isEmpty()) {
+	        System.out.println("No hay empleados asignados a esta unidad.");
+	        return;
+	    }
+
+	    for (Personal p : uv.getLstIPersonal()) {
+	        String cargo = (p instanceof Cocinero) ? "Cocinero" : 
+	                       (p instanceof Cajero) ? "Cajero" : "Personal General";
+
+	        System.out.println("- " + p.getApellido() + ", " + p.getNombre() 
+	                + " [DNI: " + p.getDni() + "] | Cargo: " + cargo);
+	    }
 	}
 }
