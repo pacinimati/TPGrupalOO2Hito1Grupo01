@@ -1,5 +1,7 @@
 package datos;
 
+import java.time.LocalDate;
+
 public class Cocinero extends Personal{
 	
 	private String especialidadCulinaria;
@@ -7,11 +9,16 @@ public class Cocinero extends Personal{
 	
 	public Cocinero() {}
 
-	public Cocinero(String especialidadCulinaria, float plus) {
-		super();
+	
+
+	public Cocinero(String nombre, String apellido, int dni, LocalDate fechaDeNacimiento, LocalDate fechaIngreso,
+			float sueldoBase, String especialidadCulinaria, float plus) {
+		super(nombre, apellido, dni, fechaDeNacimiento, fechaIngreso, sueldoBase);
 		this.especialidadCulinaria = especialidadCulinaria;
 		this.plus = plus;
 	}
+
+
 
 	public String getEspecialidadCulinaria() {
 		return especialidadCulinaria;

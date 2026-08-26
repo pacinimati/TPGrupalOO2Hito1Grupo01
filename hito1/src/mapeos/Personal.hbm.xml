@@ -14,8 +14,7 @@
         <property name="fechaIngreso" column="fechaIngreso" type="LocalDate"/>
         <property name="sueldoBase" column="sueldoBase" type="float"/>
 
-        <!-- Relación N a 1 con Festival -->
-        <many-to-one name="festival" class="datos.Festival" column="idFestival" not-null="false"/>
+        
 
         <!-- Subclase Cocinero (Estrategia Joined) -->
         <joined-subclass name="datos.Cocinero" table="cocinero">

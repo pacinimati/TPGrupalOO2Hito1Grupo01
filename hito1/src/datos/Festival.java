@@ -15,14 +15,13 @@ public class Festival {
     private float plusUsoElectricidad;
     private float sueldoBase;
     
-    private Set<Personal> lstPersonal;
     private Set<UnidadVenta> lstUnidadVenta;
     
     public Festival() {}
 
 	public Festival(String nombre, String temporada, LocalDate fechaInicio, LocalDate fechaFin,
 			float costoPorSuperficie, float costoPorMontaje, float plusUsoElectricidad, float sueldoBase,
-			Set<Personal> lstPersonal, Set<UnidadVenta> lstUnidadVenta) {
+		 Set<UnidadVenta> lstUnidadVenta) {
 		super();
 		this.nombre = nombre;
 		this.temporada = temporada;
@@ -32,7 +31,6 @@ public class Festival {
 		this.costoPorMontaje = costoPorMontaje;
 		this.plusUsoElectricidad = plusUsoElectricidad;
 		this.sueldoBase = sueldoBase;
-		this.lstPersonal = lstPersonal;
 		this.lstUnidadVenta = lstUnidadVenta;
 	}
 
@@ -108,14 +106,6 @@ public class Festival {
 		this.sueldoBase = sueldoBase;
 	}
 
-	public Set<Personal> getLstPersonal() {
-		return lstPersonal;
-	}
-
-	public void setLstPersonal(Set<Personal> lstPersonal) {
-		this.lstPersonal = lstPersonal;
-	}
-
 	public Set<UnidadVenta> getLstUnidadVenta() {
 		return lstUnidadVenta;
 	}
@@ -129,7 +119,7 @@ public class Festival {
 		return "Festival [id=" + id + ", nombre=" + nombre + ", temporada=" + temporada + ", fechaInicio=" + fechaInicio
 				+ ", fechaFin=" + fechaFin + ", costoPorSuperficie=" + costoPorSuperficie + ", costoPorMontaje="
 				+ costoPorMontaje + ", plusUsoElectricidad=" + plusUsoElectricidad + ", sueldoBase=" + sueldoBase
-				+ ", lstPersonal=" + lstPersonal + ", lstUnidadVenta=" + lstUnidadVenta + "]";
+				+  ", lstUnidadVenta=" + lstUnidadVenta + "]";
 	};
 	
 	

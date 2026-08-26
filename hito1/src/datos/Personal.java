@@ -11,12 +11,11 @@ public abstract class Personal {
 	private LocalDate fechaDeNacimiento;
 	private LocalDate fechaIngreso;
 	private float sueldoBase;
-	private Festival festival;
 	
 	public Personal() {}
 
 	public Personal(String nombre, String apellido, int dni, LocalDate fechaDeNacimiento, LocalDate fechaIngreso,
-			float sueldoBase, Festival festival) {
+			float sueldoBase) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -24,7 +23,6 @@ public abstract class Personal {
 		this.fechaDeNacimiento = fechaDeNacimiento;
 		this.fechaIngreso = fechaIngreso;
 		this.sueldoBase = sueldoBase;
-		this.festival = festival;
 	}
 
 	public long getId() {
@@ -83,19 +81,13 @@ public abstract class Personal {
 		this.sueldoBase = sueldoBase;
 	}
 
-	public Festival getFestival() {
-		return festival;
-	}
 
-	public void setFestival(Festival festival) {
-		this.festival = festival;
-	}
 
 	@Override
 	public String toString() {
 		return "Personal [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni
 				+ ", fechaDeNacimiento=" + fechaDeNacimiento + ", fechaIngreso=" + fechaIngreso + ", sueldoBase="
-				+ sueldoBase + ", festival=" + festival + "]";
+				+ sueldoBase;
 	};
 	
 	

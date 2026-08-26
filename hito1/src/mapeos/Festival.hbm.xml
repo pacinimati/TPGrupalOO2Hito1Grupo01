@@ -21,10 +21,6 @@
             <one-to-many class="datos.UnidadVenta"/>
         </set>
 
-        <!-- Relación 1 a N con Personal -->
-        <set name="lstPersonal" table="personal" inverse="true" lazy="true">
-            <key column="idFestival"/>
-            <one-to-many class="datos.Personal"/>
-        </set>
+       
     </class>
 </hibernate-mapping>
