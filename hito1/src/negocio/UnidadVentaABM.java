@@ -1,5 +1,9 @@
 package negocio;
 
+import dao.PedidoDao;
+import datos.ItemPedido;
+import datos.Pedido;
+
 import java.util.List;
 import java.util.Set;
 import dao.UnidadVentaDao;
@@ -67,5 +71,36 @@ public class UnidadVentaABM {
 
 	public List<UnidadVenta> traer() {
 		return dao.traer();
+	}
+	
+	
+	public float calcularRecaudacionTotal(String codigoUnico) throws Exception {
+	    UnidadVenta uv = dao.traer(codigoUnico);
+	    if (uv == null) {
+	        throw new Exception("Error: No existe la Unidad de Venta con código " + codigoUnico);
+	    }
+
+	    PedidoDao pedidoDao = new PedidoDao();
+	    float recaudacionTotal = 0f;
+
+	    // Iteramos parseando a Pedido para evitar problemas con la List genérica
+	    for (Object obj : pedidoDao.traer()) {
+	        Pedido p = (Pedido) obj;
+
+	        // Validamos que el pedido tenga una UnidadVenta asociada y coincida el ID
+	        if (p.getUnidadVenta() != null && p.getUnidadVenta().getId() == uv.getId()) {
+	            
+	            // Traemos el pedido con sus ítems (FETCH)
+	            Pedido pedidoConItems = pedidoDao.traerConItems(p.getId());
+	            
+	            if (pedidoConItems != null && pedidoConItems.getLstItems() != null) {
+	                for (ItemPedido item : pedidoConItems.getLstItems()) {
+	                    recaudacionTotal += item.getCantidad() * item.getPlato().getPrecioVenta();
+	                }
+	            }
+	        }
+	    }
+
+	    return recaudacionTotal;
 	}
 }

@@ -75,11 +75,16 @@ public class PedidoDao {
 		Pedido p = null;
 		try {
 			iniciaOperacion();
-			p = session.createQuery("from Pedido p left join fetch p.lstItems where p.id = :idPedido", Pedido.class)
+			// Hacemos JOIN FETCH tanto a la lista de ítems como al plato asociado a cada ítem
+			p = session.createQuery(
+					"select p from Pedido p left join fetch p.lstItems i left join fetch i.plato where p.id = :idPedido", 
+					Pedido.class)
 					.setParameter("idPedido", idPedido)
 					.uniqueResult();
 		} finally {
-			if (session != null && session.isOpen()) session.close();
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
 		}
 		return p;
 	}
