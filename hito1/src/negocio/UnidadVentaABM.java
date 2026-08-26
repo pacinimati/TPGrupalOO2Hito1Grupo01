@@ -77,56 +77,21 @@ public class UnidadVentaABM {
 	}
 	
 	
-	public float calcularRecaudacionTotal(String codigoUnico) throws Exception {
-	    UnidadVenta uv = dao.traer(codigoUnico);
-	    if (uv == null) {
-	        throw new Exception("Error: No existe la Unidad de Venta con código " + codigoUnico);
-	    }
+	// 1. Invoca la recaudación del DAO con validación previa
+    public float calcularRecaudacionTotal(String codigoUnico) throws Exception {
+        UnidadVenta uv = dao.traer(codigoUnico);
+        if (uv == null) {
+            throw new Exception("Error: No existe la Unidad de Venta con código " + codigoUnico);
+        }
+        return dao.calcularRecaudacionTotal(codigoUnico);
+    }
 
-	    PedidoDao pedidoDao = new PedidoDao();
-	    float recaudacionTotal = 0f;
-
-	    // Iteramos parseando a Pedido para evitar problemas con la List genérica
-	    for (Object obj : pedidoDao.traer()) {
-	        Pedido p = (Pedido) obj;
-
-	        // Validamos que el pedido tenga una UnidadVenta asociada y coincida el ID
-	        if (p.getUnidadVenta() != null && p.getUnidadVenta().getId() == uv.getId()) {
-	            
-	            // Traemos el pedido con sus ítems (FETCH)
-	            Pedido pedidoConItems = pedidoDao.traerConItems(p.getId());
-	            
-	            if (pedidoConItems != null && pedidoConItems.getLstItems() != null) {
-	                for (ItemPedido item : pedidoConItems.getLstItems()) {
-	                    recaudacionTotal += item.getCantidad() * item.getPlato().getPrecioVenta();
-	                }
-	            }
-	        }
-	    }
-
-	    return recaudacionTotal;
-	}
-	
-	public void traerEmpleadosPorUnidad(long idUnidadVenta) throws Exception {
-	    UnidadVenta uv = dao.traerConListas(idUnidadVenta);
-	    
-	    if (uv == null) {
-	        throw new Exception("No existe la Unidad de Venta con ID: " + idUnidadVenta);
-	    }
-
-	    System.out.println("=== EMPLEADOS ASIGNADOS A: " + uv.getNombreComercial() + " ===");
-
-	    if (uv.getLstIPersonal() == null || uv.getLstIPersonal().isEmpty()) {
-	        System.out.println("No hay empleados asignados a esta unidad.");
-	        return;
-	    }
-
-	    for (Personal p : uv.getLstIPersonal()) {
-	        String cargo = (p instanceof Cocinero) ? "Cocinero" : 
-	                       (p instanceof Cajero) ? "Cajero" : "Personal General";
-
-	        System.out.println("- " + p.getApellido() + ", " + p.getNombre() 
-	                + " [DNI: " + p.getDni() + "] | Cargo: " + cargo);
-	    }
-	}
+    // 2. Invoca el traerConListas del DAO con validación previa
+    public UnidadVenta traerEmpleadosPorUnidad(long idUnidadVenta) throws Exception {
+        UnidadVenta uv = dao.traerConListas(idUnidadVenta);
+        if (uv == null) {
+            throw new Exception("Error: No existe la Unidad de Venta con ID " + idUnidadVenta);
+        }
+        return uv;
+    }
 }

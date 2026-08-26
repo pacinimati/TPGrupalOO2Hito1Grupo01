@@ -108,4 +108,30 @@ public class UnidadVentaDao {
 		}
 		return lista;
 	}
+	
+	
+	//Método para calcular la recaudación total directamente en la BD
+	public float calcularRecaudacionTotal(String codigoUnico) {
+	    float recaudacion = 0f;
+	    try {
+	        iniciaOperacion();
+	        String hql = "select sum(i.cantidad * pl.precioVenta) " +
+	                     "from Pedido p " +
+	                     "join p.lstItems i " +
+	                     "join i.plato pl " +
+	                     "join p.unidadVenta uv " +
+	                     "where uv.codigoUnico = :codigoUnico";
+	                     
+	        Double total = session.createQuery(hql, Double.class)
+	                              .setParameter("codigoUnico", codigoUnico)
+	                              .uniqueResult();
+	                              
+	        if (total != null) {
+	            recaudacion = total.floatValue();
+	        }
+	    } finally {
+	        if (session != null && session.isOpen()) session.close();
+	    }
+	    return recaudacion;
+	}
 }
