@@ -6,7 +6,7 @@ import datos.Plato;
 import datos.UnidadVenta;
 import negocio.UnidadVentaABM;
 
-public class TestCU7PersonalPorUnidadAlmironAlejo {
+public class TestCU7PlatosOfrecidosPorUnidadDeVentaAlmironAlejo {
 
     public static void main(String[] args) {
         UnidadVentaABM unidadVentaAbm = new UnidadVentaABM();
