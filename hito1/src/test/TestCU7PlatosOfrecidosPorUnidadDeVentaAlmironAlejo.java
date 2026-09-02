@@ -2,7 +2,7 @@ package test;
 
 import java.util.Set;
 
-import datos.Personal;
+import datos.Plato;
 import datos.UnidadVenta;
 import negocio.UnidadVentaABM;
 
@@ -13,25 +13,24 @@ public class TestCU7PersonalPorUnidadAlmironAlejo {
         long idBuscado = 1L;
 
         System.out.println("=================================================");
-        System.out.println("  CU 7: PERSONAL ASIGNADO POR UNIDAD - AlmironAlejo");
+        System.out.println("  CU 7: PLATOS OFRECIDOS POR UNIDAD DE VENTA - AlmironAlejo");
         System.out.println("=================================================");
 
         try {
-            UnidadVenta uv = unidadVentaAbm.traerEmpleadosPorUnidad(idBuscado);
+            UnidadVenta uv = unidadVentaAbm.traerConListas(idBuscado);
 
             System.out.println("Unidad: " + uv.getNombreComercial());
             System.out.println("Código único: " + uv.getCodigoUnico());
             System.out.println("Tipo: " + uv.getClass().getSimpleName());
 
-            Set<Personal> personal = uv.getLstIPersonal();
-            if (personal == null || personal.isEmpty()) {
-                System.out.println("La unidad no tiene personal asignado.");
+            Set<Plato> platos = uv.getLstIPlatos();
+            if (platos == null || platos.isEmpty()) {
+                System.out.println("La unidad no tiene platos ofrecidos.");
             } else {
-                System.out.println("Personal asignado:");
-                for (Personal p : personal) {
-                    System.out.println("- " + p.getNombre() + " " + p.getApellido()
-                            + " | DNI: " + p.getDni()
-                            + " | Rol: " + p.getClass().getSimpleName());
+                System.out.println("Platos ofrecidos:");
+                for (Plato plato : platos) {
+                    System.out.println("- " + plato.getNombre()
+                            + " | Precio de venta: $" + plato.getPrecioVenta());
                 }
             }
 
