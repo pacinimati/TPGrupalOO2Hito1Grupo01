@@ -55,4 +55,23 @@ public class PersonalABM {
 	public List<Personal> traer() {
 		return dao.traer();
 	}
+
+	public float calcularCostoSueldosFestival(long idFestival) throws Exception {
+    	List<Personal> staff = dao.traerPersonalPorFestival(idFestival);
+    	if (staff == null || staff.isEmpty()) {
+        	throw new Exception("Error: no hay personal asociado al Festival con id " + idFestival);
+    	}
+    	float total = 0f;
+    	for (Personal p : staff) {
+        	total += p.getSueldoBase();
+        if (p instanceof Cocinero) {
+            total += ((Cocinero) p).getPlus();
+        }
+    	}
+    	return total;
+	}
+
+	public List<Personal> traerPersonalPorFestival(long idFestival) {
+    	return dao.traerPersonalPorFestival(idFestival);
+	}
 }

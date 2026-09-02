@@ -4,9 +4,9 @@ Número de grupo:
 
 ## 💻 Integrantes del grupo (nombre, apellido y usuario GitHub):
 -Matias Pacini - pacinimati
--Alejo...
+-Alejo Almirón - fkz14
 -Rodrigo Mercado - RodriMercado
--Rodrigo...
+-Rodrigo Fernandez - Roi-123
 
 
 ## Guia para importar el proyecto en Eclipse

@@ -42,4 +42,15 @@ public class PedidoABM {
 	public List<Pedido> traer() {
 		return dao.traer();
 	}
+
+	    public List<Object[]> platoMasVendidoPorTipoUnidad(Class<? extends UnidadVenta> tipoUnidad) throws Exception {
+        if (tipoUnidad == null) {
+            throw new Exception("Error: debe indicar un tipo de Unidad de Venta (FoodTruck o PuestoDesarmable)");
+        }
+        List<Object[]> resultado = dao.platoMasVendidoPorTipoUnidad(tipoUnidad);
+        if (resultado == null || resultado.isEmpty()) {
+            throw new Exception("Error: no hay pedidos registrados para el tipo de unidad indicado");
+        }
+        return resultado;
+    }
 }

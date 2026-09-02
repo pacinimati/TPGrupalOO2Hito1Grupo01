@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import datos.Pedido;
+import datos.UnidadVenta;
 
 public class PedidoDao {
 	private static Session session;
@@ -125,5 +126,19 @@ public class PedidoDao {
 	        if (session != null && session.isOpen()) session.close();
 	    }
 	    return p;
+	}
+
+	public List<Object[]> platoMasVendidoPorTipoUnidad(Class<? extends UnidadVenta> tipoUnidad) {
+    	List<Object[]> resultado = null;
+    	try {
+        	iniciaOperacion();
+        	String hql = "select ip.plato.nombre, sum(ip.cantidad) as totalVendido from Pedido p join p.unidadVenta uv join p.lstItems ip where type(uv) = :tipo group by ip.plato.nombre order by totalVendido desc";
+        	resultado = session.createQuery(hql, Object[].class)
+                            .setParameter("tipo", tipoUnidad)
+                            .getResultList();
+    	} finally {
+        	session.close();
+    	}
+    	return resultado;
 	}
 }

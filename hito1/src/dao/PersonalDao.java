@@ -95,4 +95,18 @@ public class PersonalDao {
 		}
 		return lista;
 	}
+
+	public List<Personal> traerPersonalPorFestival(long idFestival) {
+    	List<Personal> lista = new ArrayList<Personal>();
+    try {
+        iniciaOperacion();
+        String hql = "select distinct per from UnidadVenta uv join uv.lstIPersonal per where uv.festival.id = :idFestival";
+        lista = session.createQuery(hql, Personal.class)
+                       .setParameter("idFestival", idFestival)
+                       .getResultList();
+    } finally {
+        session.close();
+    }
+    	return lista;
+	}
 }
