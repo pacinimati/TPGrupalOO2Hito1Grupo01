@@ -4,7 +4,7 @@ Número de grupo:
 
 ## 💻 Integrantes del grupo (nombre, apellido y usuario GitHub):
 -Matias Pacini - pacinimati
--Alejo Almirón - fkz14
+-Alejo Almirón - alejoalmiron
 -Rodrigo Mercado - RodriMercado
 -Rodrigo Fernandez - Roi-123
 
