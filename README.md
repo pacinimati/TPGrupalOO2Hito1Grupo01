@@ -8,6 +8,17 @@ Número de grupo:
 -Rodrigo Mercado - RodriMercado
 -Rodrigo Fernandez - Roi-123
 
+## CASOS DE USO
+CASO DE USO 1: RECAUDACIÓN DE UNIDAD DE VENTA - Matias Pacini
+CASO DE USO 2: TRAER EMPLEADOS POR UNIDAD VENTA - Matias Pacini
+CASO DE USO 3: TRAER PLATOS MENORES A $ - Rodrigo Mercado
+CASO DE USO 4: PEDIDOS QUE CONTIENEN - Rodrigo Mercado
+CASO DE USO 5: TRAER EL ULTIMO PEDIDO REALIZADO - Rodrigo Mercado
+CASO DE USO 6: FESTIVAL CON UNIDADES - Alejo Almiron
+CASO DE USO 7: PERSONAL ASIGNADO POR UNIDAD - Alejo Almiron
+CASO DE USO 8: PLATO MÁS VENDIDO POR TIPO DE UNIDAD - Rodrigo Fernandez
+CASO DE USO 9: COSTO DE SUELDOS DE UN FESTIVAL - Rodrigo Fernandez
+
 
 ## Guia para importar el proyecto en Eclipse
 Paso 1: Clonar el repositorio y abrir Eclipse
